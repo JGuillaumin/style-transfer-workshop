@@ -16,5 +16,7 @@ output/
 vgg/.*
 vgg/tmp/
 
+__pycache__/
+
 SNAPSHOTS.ipynb
 CIFAR_test.ipynb
