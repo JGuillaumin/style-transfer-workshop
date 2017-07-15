@@ -1,7 +1,10 @@
+.gitignore
+
 *.
-__pycache__/
+*__pycache__
 .idea/
 .ipynb_checkpoints/
+__pycache__/
 
 # old stuffs
 *.mat
@@ -28,6 +31,7 @@ TEST_Keras_batch_generator.ipynb
 data/COCO/train2014/
 data/COCO/train2014.zip
 batches.py
+COCO/
 
 
 # about WikiArt
