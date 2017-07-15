@@ -1,22 +1,37 @@
-!.gitignore
-
-*.zip
-*.npy
-*.mat
 *.
-
+__pycache__/
 .idea/
 .ipynb_checkpoints/
 
-COCO/train2014/
-logs/*
+# old stuffs
+*.mat
+vgg/
 old/
-output/
 
-vgg/.*
-vgg/tmp/
 
-__pycache__/
+# Outputs : images and tensorboard
+logs/*/*
+output/*
 
+
+# misc
 SNAPSHOTS.ipynb
 CIFAR_test.ipynb
+TODO.md
+
+# about VGG
+data/VGG/*.npy
+
+# about COCO
+DEBUG_batch_generator.ipynb
+TEST_Keras_batch_generator.ipynb
+data/COCO/train2014/
+data/COCO/train2014.zip
+batches.py
+
+
+# about WikiArt
+
+
+# install stuffs
+install/*.sh

@@ -1,34 +1,132 @@
-# CarND Term1 Starter Kit
 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+## Installation Instructions
 
-The purpose of this project is to provide unified software dependency support for students enrolled in Term 1 of the [Udacity Self-Driving Car Engineer Nanodegree](https://www.udacity.com/course/self-driving-car-engineer-nanodegree--nd013).
+This project mostly requires TensorFlow and his dependencies :
 
-Python 3 is used for entirety of term 1.
+- TensorFlow (>1.0.0) + TensorBoard
+- Numpy
+- scipy
+- scikit-learn & scikit-image
+- matplotlib
+- jupyter notebooks
 
-There are two ways to get up and running:
+You can easily install thoses libraries manually, or use
 
-## [Anaconda Environment](doc/configure_via_anaconda.md)
 
-Get started [here](doc/configure_via_anaconda.md). More info [here](http://conda.pydata.org/docs/).
+### with Conda
 
-Supported Sytems: Linux (CPU), Mac (CPU), Windows (CPU)     
+#### Install Miniconda
 
-| Pros                         | Cons                                               |
-|------------------------------|----------------------------------------------------|
-| More straight-forward to use | AWS or GPU support is not built in (have to do this yourself)              |
-| More community support       | Implementation is local and OS specific            |
-| More heavily adopted         |                                                    |
+If Miniconda or Conda is not installed :
+_Note_ : here for Linux 64-bit systems.
 
-## [Docker](doc/configure_via_docker.md)
+```bash
+wget https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh
+bash Miniconda3-4.2.12-Linux-x86_64.sh -b
+rm Miniconda3-4.2.12-Linux-x86_64.sh
+```
 
-Get started [here](doc/configure_via_docker.md). More info [here](http://docker.com).
+Don't forget to add `~/miniconda3/bin/` to your `$PATH` (depending on your PREFIX during Miniconda installation).
 
-Supported Systems : AWS (CPU, [GPU](doc/docker_for_aws.md)), Linux (CPU), Mac (CPU), Windows (CPU)     
+#### Create a new env
 
-| Pros                                | Cons                                 |
-|-------------------------------------|--------------------------------------|
-| Configure once for all environments | More challenging to use              |
-| AWS, GPU support                    | Less community support               |
-| Practice with Docker              | Have to manage images and containers |
-|                                     |                                      |
+Dependencies are detailed in `environment.yml` and `environment-gpu.yml`.
+Those commands create a new env, named `dl-st`
+
+```bash
+cd install/
+
+# CPU
+conda env create -f=environment.yml --name dl-st --debug -v -v
+
+# GPU
+# requires GPU supports : Nvidia drivers, CUDA, cuDNN, ...
+conda env create -f=environment-gpu.yml --name dl-st --debug -v -v
+```
+
+For GPU support, don't forget to set up correctly environment variables (CUDA_PATH, LB_LIBRARY_PATH, ...).
+
+Now you can activate/deactivate it with :
+
+```bash
+source activate dl-st
+
+# run jupyter :
+jupyter notebook [specific notebook] &
+tensorboard --logdir=logs/ &
+
+source deactivate dl-st
+
+```
+
+
+
+### with `docker`
+
+If you are familiar with docker, I wrote two dockerfiles.
+
+Images are based on `tensorflow/tensorflow:1.2.0-py3` or `tensorflow/tensorflow:1.2.0-gpu-py3` images.
+
+Additional dependencies are added with `pip` during the building step.
+
+You can find instructions for docker installation [here](http://docs.docker.com/engine/installation/).
+
+For GPU support, I use `nvidia-docker`. You can find more information [here](http://github.com/NVIDIA/nvidia-docker).
+
+#### CPU support
+
+```bash
+cd install/
+
+# build image
+docker build -t dl-st:cpu -f Dockerfile.cpu .
+
+cd ../
+
+# run a container from the root directory : it starts automatically jupyter
+docker run -it -p 8888:8888 -p 6666:6666 -v "$PWD"/:/notebooks/ dl-st:cpu
+
+# if you want command line acces
+docker run -it -p 8888:8888 -p 6666:6666 -v "$PWD"/:/notebooks/ dl-st:cpu bash
+
+(root@...) cd notebooks/
+(root@...) jupyter notebook --allow-root &
+(root@...) tensorboard logdit=logs/ &
+
+```
+
+
+
+#### GPU support with `nvidia-docker`
+
+
+```bash
+cd install/
+
+# build image
+docker build -t dl-st:gpu -f Dockerfile.gpu .
+
+cd ../
+
+# run a container from the root directory : it starts automatically jupyter
+nvidia-docker run -it -p 8888:8888 -p 6006:6006 -v "$PWD"/:/notebooks/ dl-st:gpu
+
+# if you want command line acces
+docker run -it -p 8888:8888 -p 6006:6006 -v "$PWD"/:/notebooks/ dl-st:cpu bash
+
+(root@...) cd notebooks/
+(root@...) jupyter notebook --allow-root &
+(root@...) tensorboard logdit=logs/ &
+
+```
+
+
+#### Accessing Jupyter notebook and TensorBoard :
+
+When you run `docker run -it -p 8888:8888 -p 6666:6666 -v "$PWD"/:/notebooks/ dl-st:cpu` it prints the token for the Jupyter server.
+Open this link to get access to the notebooks.
+
+Tensorboard is available at `https://0.0.0.0:6006`.
+TensorBoard is launch with `--logdir=logs/`, so you have to manually select the appropriate run in TensorBoard.
+
+To kill the container : `Ctrl+C`.

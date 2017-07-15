@@ -7,14 +7,8 @@ dependencies:
     - numpy
     - matplotlib
     - jupyter
-    - opencv3
-    - pillow
+    - scipy
     - scikit-learn
     - scikit-image
-    - scipy
-    - h5py
-    - eventlet
-    - flask-socketio
-    - imageio=2.1.2
     - pip:
-        - tensorflow==1.1.0
+        - tensorflow==1.2.0

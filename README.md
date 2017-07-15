@@ -15,23 +15,74 @@ And I gave some private sessions in companies about this topic.
 In `install/` you will find instructions for :
  - List of dependencies (mostly TensorFlow >= 1.0.0)
  - How to create a `conda` environment with all dependencies.
- - How to build a `docker` image with all dependencies (CPU & GPU, with `nvidia-docker`.
+ - How to build a `docker` image with all dependencies (for CPU & GPU, with `nvidia-docker`.
 
 
 ## Downloads
 
-This workshop uses
+This workshop uses pre-trained VGG networks (16 and 19 variants), and 2 datasets :
+ - [MS COCO dataset](http://www.mscoco.org)
+ - [WikiArt dataset](http://www.wikiart.org)
+
+In `data/` you will find instructions for downloading these elements.
 
 
-## Source Code
+## Source Code and Notebooks
+
+This project contains 4 main python files :
+
+- `utils.py` : some functions for CNN visualization, TensorFlow tests, images manipulations ..
+- `vgg.py` : VGG16 and VGG19 implementations
+- `coco.py` : batch generator for MS COCO dataset
+- `wikiart.py` : batch generator for WikiArt dataset
+
+#### Notebooks :
+
+Then all methods and algorithmes are coded within Jupyter notebooks.
+It allows interactive programming (useful for education purpose).
+
+- `0.1_VGG_construction.ipynb` : explains how to build VGG network with `tf.get_variable()`
+- `0.2_VGG_inference.ipynb` : explains how to quickly build a VGG network and use it.
+
+- `1.0_VGG_exploration.ipynb` : feature maps visualization
+- `1.1_VGG_exploration_content.ipynb` : content reconstruction from feature maps, defines *content_loss*
+- `1.2_VGG_exploration_style.ipynb` : style reconstruction from feature maps, defines *style_loss*
+
+- `2.0_Gatys_method.ipynb` : implementation of method presented in [4]
+- `2.0_Gatys_method_color.ipynb` : implementation of method presented in [10] for color preserving. (IN PROGRESS)
+- `2.0_Gatys_method_video.ipynb` : implementation of method presented in [5] for video transformation. (IN PROGRESS)
+
+- `3.0_feed_forward_method_IN.ipynb` : combination of several techniques from [6,7,8]
+
+- `4.0_arbitrary_style_transfer.ipynb` : implementation of [11].
+- `4.1_arbitrary_style_transfer_multi_gpu.ipynb` : implementation of [11] for multi-gpu systems (model parallelism). (IN PROGRESS)
 
 
-## Notebooks
+I hope to find time to implement more techniques for style transfer using deep learning approaches.
 
 
 ## Slides
+
+In `slides/` :
+
+- `slides/StyleTransferWorkshop.pdf` : slides presented at "AI Paris MeetUp".
+    - code screenshots are not from the current implementation.
+
+- `slides/StyleTransferWorkshop_v3.pdf` : slides presented at "ML Aix-Marseille MeetUp"
 
 
 ## References
 
 
+Some useful githubs :
+
+- https://github.com/lengstrom/fast-style-transfer
+- https://github.com/jcjohnson/fast-neural-style
+- https://github.com/ghwatson/faststyle
+- https://github.com/cysmith/neural-style-tf
+- http://www.chioka.in/tensorflow-implementation-neural-algorithm-of-artistic-style
+- https://github.com/albertlai/deep-style-transfer
+
+
+Papers :
+- [1] :
