@@ -1,16 +1,7 @@
-.gitignore
-
-*.
 *__pycache__
 .idea/
 .ipynb_checkpoints/
 __pycache__/
-
-# old stuffs
-*.mat
-vgg/
-old/
-
 
 # Outputs : images and tensorboard
 logs/*/*
@@ -19,24 +10,27 @@ output/*
 
 # misc
 SNAPSHOTS.ipynb
-CIFAR_test.ipynb
 TODO.md
 
 # about VGG
 data/VGG/*.npy
 
 # about COCO
-DEBUG_batch_generator.ipynb
-TEST_Keras_batch_generator.ipynb
 data/COCO/train2014/
 data/COCO/train2014.zip
-batches.py
-COCO/
 
 
 # about WikiArt
+data/WikiArt/featured/*
+data/WikiArt/paintings/*
+data/WikiArt/test/
+data/WikiArt/_test_wikiart.ipynb
 
 
 # install stuffs
-install/*.sh
+install/Miniconda3-4.2.12-Linux-x86_64.sh
 
+Supprimerait _0.0_test_batch_generator.ipynb
+Supprimerait data/WikiArt/
+Supprimerait logs/
+Supprimerait output/

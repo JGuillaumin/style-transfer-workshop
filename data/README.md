@@ -40,4 +40,22 @@ Some methods require a dataset of styled images.
 As many papers I used the WikiArt dataset.
 
 
----> TODO : complete !
+I used this previous work : http://github.com/eajena/wikiart-downloader
+
+I made one change :
+- there is no more `*.csv` files per style
+
+```bash
+
+cd data/WikiArt/
+
+# to download a subset of wikiart ?
+# see in download_featured.sh the list of styles
+bash download_featured.sh
+
+
+# to download much more images ...
+bash download.sh
+```
+
+These scripts download into many sub-folders different paintings.

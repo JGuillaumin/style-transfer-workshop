@@ -25,7 +25,6 @@ In `install/` you will find :
 This workshop uses pre-trained VGG networks (16 and 19 variants), and 2 datasets :
  - [MS COCO dataset](http://www.mscoco.org)
  - [WikiArt dataset](http://www.wikiart.org)
-
 In `data/` you will find instructions for downloading these elements.
 
 
@@ -33,15 +32,48 @@ In `data/` you will find instructions for downloading these elements.
 
 This project contains 4 main python files :
 
-- `utils.py` : some functions for CNN visualization, TensorFlow tests, images manipulations ..
+- `utils.py` : some functions for CNN visualization, TensorFlow tests, images manipulations and batch generator
 - `vgg.py` : VGG16 and VGG19 implementations, with a scope factory for variable sharing
-- `coco.py` : batch generator for MS COCO dataset
-- `wikiart.py` : batch generator for WikiArt dataset
+
+
+### Batch Generator
+
+In `utils.py`, `BatchGenerator()` create a python generator of batches.
+
+```python
+
+COCOgenerator = BatchGenerator('data/COCO/train2014/',
+                               reshape_mode='resize',
+                               target_size=(256,256),
+                               color_mode='rgb',
+                               batch_size=32,
+                               shuffle=True)
+
+for it in range(ITERATIONS):
+    batch = COCOgenerator.next()
+    [...]
+
+# or
+for it, batch in enumerate(COCOgenerator):
+    [...]
+
+    it some_condition:
+        break
+```
+
+**Performance** :
+- custom batch generator with resize : `310 ms ± 2.8 ms per loop (mean ± std. dev. of 7 runs, 30 loops each)`
+- custom batch generator with crop+resize : `373 ms ± 13.6 ms per loop (mean ± std. dev. of 7 runs, 30 loops each)`
+- Keras ImageDataGenerator().flow_from_directory() : `1.4 s ± 23.5 ms per loop (mean ± std. dev. of 7 runs, 30 loops each)`
+
+(I removed some Keras stuffs.)
 
 #### Notebooks :
 
 Then all methods and algorithms are presented within Jupyter notebooks.
 It allows interactive programming (useful for education purpose).
+
+- `0.0_test_batch_generator.ipynb` : some tests with batch generations. Comparison to Keras ImageDataGenerator.
 
 - `0.1_VGG_construction.ipynb` : explains how to build VGG network with `tf.get_variable()`, for variable sharing.
 - `0.2_VGG_inference.ipynb` : explains how to quickly build a VGG network and use it.
