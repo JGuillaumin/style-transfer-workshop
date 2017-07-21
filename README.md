@@ -8,7 +8,7 @@ I spoke about style transfer in some MeetUps :
  - [Artificial Intelligence Paris - MeetUp - May 18th, 2017](http://www.meetup.com/fr-FR/Artificial-Intelligence-Meetup-Paris/events/238029606/ "AI Paris MeetUp")
  - [Machine Learning Aix-Marseille - MeetUp - June 22th, 2017](http://www.meetup.com/fr-FR/Machine-learning-Aix-Marseille/events/240114846/ "ML Aix-Marseille MeetUp")
 
-And I gave some private sessions in companies about this topic, in particular : 
+And I gave private sessions in companies about this topic, in particular : 
  - [Quantmetry](http://www.quantmetry.com/)
  
 
