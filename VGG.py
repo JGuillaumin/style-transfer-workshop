@@ -8,8 +8,8 @@ CHANNELS = 3
 # BGR format
 MEAN = [103.939, 116.779, 123.68]
 
-VGG16_WEIGHTS = "vgg/vgg16.npy"
-VGG19_WEIGHTS = "vgg/vgg19.npy"
+VGG16_WEIGHTS = "data/VGG/vgg16.npy"
+VGG19_WEIGHTS = "data/VGG/vgg19.npy"
 
 
 def generate_VGG16(weights_file=VGG16_WEIGHTS,
@@ -23,6 +23,7 @@ def generate_VGG16(weights_file=VGG16_WEIGHTS,
     model = {}
 
     # create a tf.Variable() or use a specific tensor
+    # TODO: create a tf.Variable() or a tf.placeholder() ?
     if input_tensor is not None :
         model['input'] = input_tensor
     else:
@@ -39,7 +40,7 @@ def generate_VGG16(weights_file=VGG16_WEIGHTS,
         model['preprocess'] = model['input']
 
     if isinstance(scope, str):
-        # the scope is a string, we can create a  new scope, name by 'scope' (str).
+        # the scope is a string, we can create a  new scope, named by 'scope' (str).
         # this scope will be returned for reuse (variable sharing)
         with tf.variable_scope(scope) as new_scope:
 
@@ -79,6 +80,7 @@ def generate_VGG16(weights_file=VGG16_WEIGHTS,
             return model, new_scope
 
     elif isinstance(scope, tf.VariableScope):
+        # the scope is a tf.VariableScope
         with tf.variable_scope(scope, reuse=True):
 
             model['conv1_1'] = _conv2d_relu(model['preprocess'], 'conv1_1', weights, reuse_scope=True)
@@ -106,7 +108,7 @@ def generate_VGG16(weights_file=VGG16_WEIGHTS,
 
             if remove_top:
                 return model, scope
-
+            # TODO : issue when creating a first scope with 'remove_top=True' and the second has 'remove_top=False'
             model['flatten'] = _flatten(model['pool_5'])
             model['fc6'] = _fc_relu(model['flatten'], 'fc6', weights, reuse_scope=True)
             model['fc7'] = _fc_relu(model['fc6'], 'fc7', weights, reuse_scope=True)

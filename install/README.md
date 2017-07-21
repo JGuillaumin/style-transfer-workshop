@@ -3,14 +3,16 @@
 
 This project mostly requires TensorFlow and his dependencies :
 
-- TensorFlow (>1.0.0) + TensorBoard
+- TensorFlow (>1.x.y) + TensorBoard
 - Numpy
 - scipy
 - scikit-learn & scikit-image
 - matplotlib
 - jupyter notebooks
 
-You can easily install thoses libraries manually, or use
+You can easily install thoses libraries manually, or use :
+- conda
+- docker & nvidia-docker
 
 
 ### with Conda
@@ -44,7 +46,7 @@ conda env create -f=environment.yml --name dl-st --debug -v -v
 conda env create -f=environment-gpu.yml --name dl-st --debug -v -v
 ```
 
-For GPU support, don't forget to set up correctly environment variables (CUDA_PATH, LB_LIBRARY_PATH, ...).
+For GPU support, don't forget to set up correctly environment variables (CUDA_PATH, LD_LIBRARY_PATH, ...).
 
 Now you can activate/deactivate it with :
 
@@ -65,13 +67,15 @@ source deactivate dl-st
 
 If you are familiar with docker, I wrote two dockerfiles.
 
-Images are based on `tensorflow/tensorflow:1.2.0-py3` or `tensorflow/tensorflow:1.2.0-gpu-py3` images.
+Images are based on `tensorflow/tensorflow:1.2.0-py3` or `tensorflow/tensorflow:1.2.0-gpu-py3`.
 
 Additional dependencies are added with `pip` during the building step.
 
 You can find instructions for docker installation [here](http://docs.docker.com/engine/installation/).
 
 For GPU support, I use `nvidia-docker`. You can find more information [here](http://github.com/NVIDIA/nvidia-docker).
+
+
 
 #### CPU support
 
@@ -91,7 +95,7 @@ docker run -it -p 8888:8888 -p 6666:6666 -v "$PWD"/:/notebooks/ dl-st:cpu bash
 
 (root@...) cd notebooks/
 (root@...) jupyter notebook --allow-root &
-(root@...) tensorboard logdit=logs/ &
+(root@...) tensorboard logdir=logs/ &
 
 ```
 
@@ -116,7 +120,7 @@ docker run -it -p 8888:8888 -p 6006:6006 -v "$PWD"/:/notebooks/ dl-st:cpu bash
 
 (root@...) cd notebooks/
 (root@...) jupyter notebook --allow-root &
-(root@...) tensorboard logdit=logs/ &
+(root@...) tensorboard logdir=logs/ &
 
 ```
 
@@ -127,6 +131,6 @@ When you run `docker run -it -p 8888:8888 -p 6666:6666 -v "$PWD"/:/notebooks/ dl
 Open this link to get access to the notebooks.
 
 Tensorboard is available at `https://0.0.0.0:6006`.
-TensorBoard is launch with `--logdir=logs/`, so you have to manually select the appropriate run in TensorBoard.
+TensorBoard is launched with `--logdir=logs/`, so you have to manually select the appropriate run in TensorBoard.
 
 To kill the container : `Ctrl+C`.
