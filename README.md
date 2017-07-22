@@ -10,6 +10,7 @@ I spoke about style transfer in some MeetUps :
 
 And I gave private sessions in companies about this topic, in particular : 
  - [Quantmetry](http://www.quantmetry.com/)
+ - [Ercom](http://www.ercom.fr/)
  
 
 ## Install
