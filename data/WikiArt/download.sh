@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-python wikiart.py all abstract-art && \
-python wikiart.py all abstract-expressionism && \
-python wikiart.py all academicism && \
-python wikiart.py all art-informel && \
+#python wikiart.py all abstract-art && \
+#python wikiart.py all abstract-expressionism && \
+#python wikiart.py all academicism && \
+#python wikiart.py all art-informel && \
 python wikiart.py all art-nouveau-modern && \
 python wikiart.py all baroque && \
 python wikiart.py all color-field-painting && \

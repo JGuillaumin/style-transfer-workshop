@@ -22,7 +22,7 @@ data/COCO/train2014.zip
 
 # about WikiArt
 data/WikiArt/featured/*
-data/WikiArt/paintings/*
+data/WikiArt/all/*
 data/WikiArt/test/
 data/WikiArt/_test_wikiart.ipynb
 

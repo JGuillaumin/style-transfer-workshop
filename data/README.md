@@ -49,12 +49,12 @@ I made one change :
 
 cd data/WikiArt/
 
-# to download a subset of wikiart ?
+# to download a subset of wikiart : 12761 images from 29 styles
 # see in download_featured.sh the list of styles
 bash download_featured.sh
 
 
-# to download much more images ...
+# to download much more images : xxxxxx images from 29 styles
 bash download.sh
 ```
 
